@@ -10,14 +10,6 @@
 
 ---
 
-### Tecnologias Utilizadas
-
-- **Python:** uma linguagem de programação de alto nível, interpretada, orientada a objetos e de propósito geral.
-- **Pandas:** uma biblioteca para manipulação e análise de dados.
-- **PySpark:** uma biblioteca para processamento de dados em larga escala em cluster.
-- **MathPlotLib:** uma biblioteca para criação de gráficos e visualizações em Python.
-- **NumPy:** uma biblioteca para computação científica em Python.
-
 ### Objetivo
 
 - O objetivo do projeto é desenvolver uma ferramenta que forneça informações atualizadas sobre as linguagens de programação, mais utilizadas, os melhores salários e a popularidade para ajudar novos desenvolvedores a tomar decisões mais assertivas sobre quais tecnologias de programação aprender e quais são mais valorizadas pelo mercado.
@@ -43,3 +35,11 @@ A ferramenta será usada por desenvolvedores de software em geral que buscam inf
 - Apresentação dos resultados.
 
 ---
+
+### Tecnologias Utilizadas
+
+- **Python:** uma linguagem de programação de alto nível, interpretada, orientada a objetos e de propósito geral.
+- **Pandas:** uma biblioteca para manipulação e análise de dados.
+- **PySpark:** uma biblioteca para processamento de dados em larga escala em cluster.
+- **MathPlotLib:** uma biblioteca para criação de gráficos e visualizações em Python.
+- **NumPy:** uma biblioteca para computação científica em Python.
