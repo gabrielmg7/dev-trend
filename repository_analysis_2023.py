@@ -25,23 +25,18 @@ grouped_df = df_all.groupBy('ano', 'linguagem').agg(F.sum('qtd_repos').alias('qt
 
 sorted_df = grouped_df.orderBy('ano')
 
-# Filtra apenas os dados do ano de 2023
 df_2023 = sorted_df.filter(F.col('ano') == 2023)
 
-# Calcula as porcentagens para cada linguagem
 total_repos = df_2023.agg(F.sum('qtd_repos')).collect()[0][0]
 percentages = [data['qtd_repos'] / total_repos * 100 for data in df_2023.collect()]
 
-# Prepara os dados para o gráfico de pizza
 labels = df_2023.select('linguagem').rdd.flatMap(lambda x: x).collect()
 sizes = percentages
 colors = ['yellow', 'green', 'purple', 'orange', 'cyan', 'blue', 'red']
 
-# Cria o gráfico de pizza
 fig, ax = plt.subplots(figsize=(8, 8))
 ax.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
 
-# Adiciona um título
 ax.set_title('Distribuição de Repositórios em 2023')
 
 plt.show()
