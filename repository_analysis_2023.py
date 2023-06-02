@@ -2,7 +2,6 @@ from pyspark.sql.types import IntegerType, StringType, StructField, StructType
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as F
 import matplotlib.pyplot as plt
-import numpy as np
 
 spark = SparkSession.builder.appName("repository_analysis").getOrCreate()
 
@@ -26,42 +25,23 @@ grouped_df = df_all.groupBy('ano', 'linguagem').agg(F.sum('qtd_repos').alias('qt
 
 sorted_df = grouped_df.orderBy('ano')
 
-languages = sorted_df.select('linguagem').distinct().rdd.flatMap(lambda x: x).collect()
-distinct_years = sorted_df.select('ano').distinct().rdd.flatMap(lambda x: x).collect()
+# Filtra apenas os dados do ano de 2023
+df_2023 = sorted_df.filter(F.col('ano') == 2023)
 
-distinct_years.sort()
+# Calcula as porcentagens para cada linguagem
+total_repos = df_2023.agg(F.sum('qtd_repos')).collect()[0][0]
+percentages = [data['qtd_repos'] / total_repos * 100 for data in df_2023.collect()]
 
-values = np.zeros((len(distinct_years), len(languages)))
+# Prepara os dados para o gráfico de pizza
+labels = df_2023.select('linguagem').rdd.flatMap(lambda x: x).collect()
+sizes = percentages
+colors = ['yellow', 'green', 'purple', 'orange', 'cyan', 'blue', 'red']
 
-distinct_years = [ano for ano in distinct_years if ano <= 2022]
+# Cria o gráfico de pizza
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
 
-values = np.zeros((len(distinct_years), len(languages)))
-
-for i, linguagem in enumerate(languages):
-    language_data = sorted_df.filter(F.col('linguagem') == linguagem).orderBy('ano').collect()
-    for j, ano in enumerate(distinct_years):
-        for data in language_data:
-            if data['ano'] == ano:
-                values[j][i] = data['qtd_repos']
-                break
-
-fig, ax = plt.subplots(figsize=(10, 6))
-
-positions = np.arange(len(distinct_years))
-
-colors = ['purple', 'red', 'yellow', 'cyan', 'orange', 'blue', 'green']
-
-for i, linguagem in enumerate(languages):
-    ax.plot(distinct_years, values[:, i], label=linguagem, color=colors[i])
-
-ax.set_xticks(distinct_years)
-ax.set_xticklabels(distinct_years)
-
-plt.xlabel('Anos')
-plt.ylabel('Total Repositórios')
-
-plt.ticklabel_format(style='plain', axis='y')
-
-plt.legend()
+# Adiciona um título
+ax.set_title('Distribuição de Repositórios em 2023')
 
 plt.show()
