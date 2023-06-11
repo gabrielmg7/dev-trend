@@ -53,7 +53,7 @@ ax.bar(positions + bar_width/2, media_salario, bar_width, color='blue', label='M
 ax.set_xticks(positions)
 ax.set_xticklabels(labels)
 plt.xlabel('Linguagem')
-plt.ylabel('Quantidade')
+plt.ylabel('Vagas de Emprego')
 plt.title('Quantidade de Vagas e Média de Salário por Linguagem em 2023')
 
 ax2 = ax.twinx()

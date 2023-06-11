@@ -57,6 +57,8 @@ for i, linguagem in enumerate(languages):
 ax.set_xticks(distinct_years)
 ax.set_xticklabels(distinct_years)
 
+ax.set_title('Crescimento do Total de Repositórios ao Longo dos Anos')
+
 plt.xlabel('Anos')
 plt.ylabel('Total Repositórios')
 

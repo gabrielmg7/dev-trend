@@ -33,3 +33,7 @@ Desenvolver uma ferramenta que forneça informações precisas e atualizadas sob
 - Desenvolver algoritmos para processar e analisar os dados coletados.
 - Implementar uma interface intuitiva para visualização e acesso dos dados.
 - Realizar testes e ajustes na ferramenta para garantir sua eficácia e usabilidade.
+
+### **Como rodar o projeto?**
+
+pip install pyspark matplotlib numpy

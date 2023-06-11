@@ -30,6 +30,7 @@ ax.bar(positions, total_vagas, bar_width, color='yellow')
 ax.set_xticks(positions)
 ax.set_xticklabels(languages)
 
+ax.set_title('Total de Vagas para cada Linguagem')
 plt.xlabel('Linguagens')
 plt.ylabel('Total de Vagas')
 

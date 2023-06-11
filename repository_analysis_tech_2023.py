@@ -22,15 +22,15 @@ total_repos = sorted_df.select('total_repos').rdd.flatMap(lambda x: x).collect()
 
 fig, ax = plt.subplots(figsize=(10, 6))
 bar_width = 0.4
-
 positions = np.arange(len(technologies))
+
+ax.set_title('Diferença no Total de Repositórios em cada Tecnologia')
 
 ax.bar(positions, total_repos, bar_width, color='blue')
 
 ax.set_xticks(positions)
 ax.set_xticklabels(technologies)
 
-plt.xlabel('Tecnologias')
 plt.ylabel('Total de Repositórios')
 
 plt.ticklabel_format(style='plain', axis='y')
